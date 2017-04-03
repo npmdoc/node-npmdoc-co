@@ -1,11 +1,13 @@
-# api documentation for  [co (v4.6.0)](https://github.com/tj/co#readme)  [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-co.svg)](https://travis-ci.org/npmdoc/node-npmdoc-co)
+# api documentation for  [co (v4.6.0)](https://github.com/tj/co#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-co.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-co) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-co.svg)](https://travis-ci.org/npmdoc/node-npmdoc-co)
 #### generator async control flow goodness
 
 [![NPM](https://nodei.co/npm/co.png?downloads=true)](https://www.npmjs.com/package/co)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-co/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-co_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-co/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-co/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-co_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-co/build..beta..travis-ci.org/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-co/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-co/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-co/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 

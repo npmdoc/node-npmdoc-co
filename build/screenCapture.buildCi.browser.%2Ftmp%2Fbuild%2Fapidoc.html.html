@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/tj/co#readme"
-
-    >co (v4.6.0)</a>
+    <a href="https://github.com/tj/co#readme">co (v4.6.0)</a>
 </h1>
 <h4>generator async control flow goodness</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.co">module co</a><ol>
 
@@ -146,8 +139,8 @@
   // which leads to memory leak errors.
   // see https://github.com/tj/co/issues/180
   return new Promise(function(resolve, reject) {
-    if (typeof gen === &#x27;function&#x27;) gen = gen.apply(ctx, args);
-    if (!gen || typeof gen.next !== &#x27;function&#x27;) return resolve(gen);
+    if (typeof gen === 'function') gen = gen.apply(ctx, args);
+    if (!gen || typeof gen.next !== 'function') return resolve(gen);
 
     onFulfilled();
 
@@ -195,9 +188,9 @@
     function next(ret) {
       if (ret.done) return resolve(ret.value);
       var value = toPromise.call(ctx, ret.value);
-      if (value &#x26;&#x26; isPromise(value)) return value.then(onFulfilled, onRejected);
-      return onRejected(new TypeError(&#x27;You may only yield a function, promise, generator, array, or object, &#x27;
-        + &#x27;but the following object was passed: &#x22;&#x27; + String(ret.value) + &#x27;&#x22;&#x27;));
+      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+      return onRejected(new TypeError('You may only yield a function, promise, generator, array, or object, '
+        + 'but the following object was passed: "' + String(ret.value) + '"'));
     }
   });
 }</pre></li>
@@ -221,8 +214,8 @@
   // which leads to memory leak errors.
   // see https://github.com/tj/co/issues/180
   return new Promise(function(resolve, reject) {
-    if (typeof gen === &#x27;function&#x27;) gen = gen.apply(ctx, args);
-    if (!gen || typeof gen.next !== &#x27;function&#x27;) return resolve(gen);
+    if (typeof gen === 'function') gen = gen.apply(ctx, args);
+    if (!gen || typeof gen.next !== 'function') return resolve(gen);
 
     onFulfilled();
 
@@ -270,9 +263,9 @@
     function next(ret) {
       if (ret.done) return resolve(ret.value);
       var value = toPromise.call(ctx, ret.value);
-      if (value &#x26;&#x26; isPromise(value)) return value.then(onFulfilled, onRejected);
-      return onRejected(new TypeError(&#x27;You may only yield a function, promise, generator, array, or object, &#x27;
-        + &#x27;but the following object was passed: &#x22;&#x27; + String(ret.value) + &#x27;&#x22;&#x27;));
+      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+      return onRejected(new TypeError('You may only yield a function, promise, generator, array, or object, '
+        + 'but the following object was passed: "' + String(ret.value) + '"'));
     }
   });
 }</pre></li>
@@ -396,3 +389,4 @@ fn(true).then(function (val) {
     ]
 </div>
 </div>
+</body></html>

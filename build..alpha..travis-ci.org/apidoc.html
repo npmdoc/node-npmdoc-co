@@ -81,15 +81,6 @@
 
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.co.toString">
-            function <span class="apidocSignatureSpan">co.</span>toString
-            <span class="apidocSignatureSpan">()</span>
-            </a>
-
-        </li>
-
-        <li>
-
             <a class="apidocElementLiA" href="#apidoc.element.co.wrap">
             function <span class="apidocSignatureSpan">co.</span>wrap
             <span class="apidocSignatureSpan">(fn)</span>
@@ -99,25 +90,30 @@
 
     </ol></li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.co.toString">module co.toString</a><ol>
+    <li class="apidocModuleLi"><a href="#apidoc.module.co.co">module co.co</a><ol>
 
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.co.toString.toString">
-            function <span class="apidocSignatureSpan">co.</span>toString
-            <span class="apidocSignatureSpan">()</span>
+            <a class="apidocElementLiA" href="#apidoc.element.co.co.co">
+            function <span class="apidocSignatureSpan">co.</span>co
+            <span class="apidocSignatureSpan">(gen)</span>
             </a>
 
         </li>
 
-    </ol></li>
+        <li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.co.wrap">module co.wrap</a><ol>
+            <a class="apidocElementLiA" href="#apidoc.element.co.co.default">
+            function <span class="apidocSignatureSpan">co.co.</span>default
+            <span class="apidocSignatureSpan">(gen)</span>
+            </a>
+
+        </li>
 
         <li>
 
-            <a class="apidocElementLiA" href="#apidoc.element.co.wrap.wrap">
-            function <span class="apidocSignatureSpan">co.</span>wrap
+            <a class="apidocElementLiA" href="#apidoc.element.co.co.wrap">
+            function <span class="apidocSignatureSpan">co.co.</span>wrap
             <span class="apidocSignatureSpan">(fn)</span>
             </a>
 
@@ -282,21 +278,6 @@
 
 
     <h2>
-        <a href="#apidoc.element.co.toString" id="apidoc.element.co.toString">
-        function <span class="apidocSignatureSpan">co.</span>toString
-        <span class="apidocSignatureSpan">()</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">toString = function () {
-    return text;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
         <a href="#apidoc.element.co.wrap" id="apidoc.element.co.wrap">
         function <span class="apidocSignatureSpan">co.</span>wrap
         <span class="apidocSignatureSpan">(fn)</span>
@@ -333,30 +314,162 @@ fn(true).then(function (val) {
 </div>
 
 <div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.co.toString" id="apidoc.module.co.toString">module co.toString</a></h1>
+<h1><a href="#apidoc.module.co.co" id="apidoc.module.co.co">module co.co</a></h1>
 
 
     <h2>
-        <a href="#apidoc.element.co.toString.toString" id="apidoc.element.co.toString.toString">
-        function <span class="apidocSignatureSpan">co.</span>toString
-        <span class="apidocSignatureSpan">()</span>
+        <a href="#apidoc.element.co.co.co" id="apidoc.element.co.co.co">
+        function <span class="apidocSignatureSpan">co.</span>co
+        <span class="apidocSignatureSpan">(gen)</span>
         </a>
     </h2>
     <ul>
-    <li>description and source-code<pre class="apidocCodePre">function toString() { [native code] }</pre></li>
+    <li>description and source-code<pre class="apidocCodePre">function co(gen) {
+  var ctx = this;
+  var args = slice.call(arguments, 1)
+
+  // we wrap everything in a promise to avoid promise chaining,
+  // which leads to memory leak errors.
+  // see https://github.com/tj/co/issues/180
+  return new Promise(function(resolve, reject) {
+    if (typeof gen === &#x27;function&#x27;) gen = gen.apply(ctx, args);
+    if (!gen || typeof gen.next !== &#x27;function&#x27;) return resolve(gen);
+
+    onFulfilled();
+
+<span class="apidocCodeCommentSpan">    /**
+     * @param {Mixed} res
+     * @return {Promise}
+     * @api private
+     */
+</span>
+    function onFulfilled(res) {
+      var ret;
+      try {
+        ret = gen.next(res);
+      } catch (e) {
+        return reject(e);
+      }
+      next(ret);
+    }
+
+    /**
+     * @param {Error} err
+     * @return {Promise}
+     * @api private
+     */
+
+    function onRejected(err) {
+      var ret;
+      try {
+        ret = gen.throw(err);
+      } catch (e) {
+        return reject(e);
+      }
+      next(ret);
+    }
+
+    /**
+     * Get the next value in the generator,
+     * return a promise.
+     *
+     * @param {Object} ret
+     * @return {Promise}
+     * @api private
+     */
+
+    function next(ret) {
+      if (ret.done) return resolve(ret.value);
+      var value = toPromise.call(ctx, ret.value);
+      if (value &#x26;&#x26; isPromise(value)) return value.then(onFulfilled, onRejected);
+      return onRejected(new TypeError(&#x27;You may only yield a function, promise, generator, array, or object, &#x27;
+        + &#x27;but the following object was passed: &#x22;&#x27; + String(ret.value) + &#x27;&#x22;&#x27;));
+    }
+  });
+}</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
-</div>
 
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.co.wrap" id="apidoc.module.co.wrap">module co.wrap</a></h1>
+    <h2>
+        <a href="#apidoc.element.co.co.default" id="apidoc.element.co.co.default">
+        function <span class="apidocSignatureSpan">co.co.</span>default
+        <span class="apidocSignatureSpan">(gen)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function co(gen) {
+  var ctx = this;
+  var args = slice.call(arguments, 1)
+
+  // we wrap everything in a promise to avoid promise chaining,
+  // which leads to memory leak errors.
+  // see https://github.com/tj/co/issues/180
+  return new Promise(function(resolve, reject) {
+    if (typeof gen === &#x27;function&#x27;) gen = gen.apply(ctx, args);
+    if (!gen || typeof gen.next !== &#x27;function&#x27;) return resolve(gen);
+
+    onFulfilled();
+
+<span class="apidocCodeCommentSpan">    /**
+     * @param {Mixed} res
+     * @return {Promise}
+     * @api private
+     */
+</span>
+    function onFulfilled(res) {
+      var ret;
+      try {
+        ret = gen.next(res);
+      } catch (e) {
+        return reject(e);
+      }
+      next(ret);
+    }
+
+    /**
+     * @param {Error} err
+     * @return {Promise}
+     * @api private
+     */
+
+    function onRejected(err) {
+      var ret;
+      try {
+        ret = gen.throw(err);
+      } catch (e) {
+        return reject(e);
+      }
+      next(ret);
+    }
+
+    /**
+     * Get the next value in the generator,
+     * return a promise.
+     *
+     * @param {Object} ret
+     * @return {Promise}
+     * @api private
+     */
+
+    function next(ret) {
+      if (ret.done) return resolve(ret.value);
+      var value = toPromise.call(ctx, ret.value);
+      if (value &#x26;&#x26; isPromise(value)) return value.then(onFulfilled, onRejected);
+      return onRejected(new TypeError(&#x27;You may only yield a function, promise, generator, array, or object, &#x27;
+        + &#x27;but the following object was passed: &#x22;&#x27; + String(ret.value) + &#x27;&#x22;&#x27;));
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 
     <h2>
-        <a href="#apidoc.element.co.wrap.wrap" id="apidoc.element.co.wrap.wrap">
-        function <span class="apidocSignatureSpan">co.</span>wrap
+        <a href="#apidoc.element.co.co.wrap" id="apidoc.element.co.co.wrap">
+        function <span class="apidocSignatureSpan">co.co.</span>wrap
         <span class="apidocSignatureSpan">(fn)</span>
         </a>
     </h2>

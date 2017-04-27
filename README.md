@@ -1,6 +1,6 @@
 # npmdoc-co
 
-#### api documentation for  [co (v4.6.0)](https://github.com/tj/co#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-co.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-co) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-co.svg)](https://travis-ci.org/npmdoc/node-npmdoc-co)
+#### basic api documentation for  [co (v4.6.0)](https://github.com/tj/co#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-co.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-co) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-co.svg)](https://travis-ci.org/npmdoc/node-npmdoc-co)
 
 #### generator async control flow goodness
 
@@ -78,7 +78,8 @@
         "test-cov": "node --harmony node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter dot",
         "test-travis": "node --harmony node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
     },
-    "version": "4.6.0"
+    "version": "4.6.0",
+    "bin": {}
 }
 ```
 

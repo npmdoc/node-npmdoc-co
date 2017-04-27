@@ -292,21 +292,20 @@
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  console.log(value);
-}, function (err) {
-  console.error(err.stack);
-});
-```
 
-  If you want to convert a `co`-generator-function into a regular function that returns a promise,
-  you now use `co.<span class="apidocCodeKeywordSpan">wrap</span>(fn*)`.
+* support regular functions (that return promises)
 
-```js
-var fn = co.wrap(function* (val) {
-  return yield Promise.resolve(val);
-});
+4.4.0 / 2015-02-14
+==================
 
-fn(true).then(function (val) {
+* refactor `isGeneratorFunction`
+* expose generator function from `co.<span class="apidocCodeKeywordSpan">wrap</span>()`
+* drop support for node &#x3c; 0.12
+
+4.3.0 / 2015-02-05
+==================
+
+* check for generator functions in a ES5-transpiler-friendly way
 ...</pre></li>
     </ul>
 
@@ -482,21 +481,20 @@ fn(true).then(function (val) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  console.log(value);
-}, function (err) {
-  console.error(err.stack);
-});
-```
 
-  If you want to convert a `co`-generator-function into a regular function that returns a promise,
-  you now use `co.<span class="apidocCodeKeywordSpan">wrap</span>(fn*)`.
+* support regular functions (that return promises)
 
-```js
-var fn = co.wrap(function* (val) {
-  return yield Promise.resolve(val);
-});
+4.4.0 / 2015-02-14
+==================
 
-fn(true).then(function (val) {
+* refactor `isGeneratorFunction`
+* expose generator function from `co.<span class="apidocCodeKeywordSpan">wrap</span>()`
+* drop support for node &#x3c; 0.12
+
+4.3.0 / 2015-02-05
+==================
+
+* check for generator functions in a ES5-transpiler-friendly way
 ...</pre></li>
     </ul>
 
